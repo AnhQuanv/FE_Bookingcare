@@ -4,11 +4,16 @@
 
     .login-container {
         width: 400px;
-        height: 100%;
-        margin: 0 auto;
+        height: 450px;
         border: 1px solid red;
         border-radius: 10px;
         background-color: #fff;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
 
         .login-content {
             padding: 10px;
@@ -22,6 +27,17 @@
 
             .login-input {
                 margin: 10px 0;
+
+                .input-pass {
+                    position: relative;
+
+                    .icon-eye {
+                        position: absolute;
+                        right: 5px;
+                        top: 10px;
+                        cursor: pointer;
+                    }
+                }
             }
 
             .btn-login {
