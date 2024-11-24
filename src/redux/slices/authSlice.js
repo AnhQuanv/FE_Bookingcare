@@ -4,6 +4,7 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     loading: false,
+    access_token: ''
 };
 
 export const authSlice = createSlice({
@@ -15,8 +16,10 @@ export const authSlice = createSlice({
         },
         loginSuccess: (state, action) => {
             state.isAuthenticated = true;
-            state.user = action.payload;
+            state.user = action.payload.user;
             state.loading = false;
+            state.access_token = action.payload.access_token;
+
         },
         loginFailure: (state) => {
             state.isAuthenticated = false;

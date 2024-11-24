@@ -28,8 +28,9 @@ const Login = () => {
         try {
             let res = await handleLoginAPI(userName, pass);
             if (res?.data?.EC === 0) {
-                console.log("Login successful", res.data.user);  // Đăng nhập thành công
-                dispatch(loginSuccess(res.data.user));
+                localStorage.setItem("access_token", res.data.access_token);
+                console.log("Login successful", res.data);  // Đăng nhập thành công
+                dispatch(loginSuccess(res.data));
                 navigate("/system/user-manage");
             }
         } catch (error) {
