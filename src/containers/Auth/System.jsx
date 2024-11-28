@@ -29,9 +29,7 @@ const System = () => {
                     </div>
                 </nav>
             </div>
-            <div className="system-list">
-                <Outlet />
-            </div>
+            <Outlet />
         </div>
     );
 };

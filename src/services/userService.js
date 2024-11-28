@@ -1,7 +1,7 @@
 import axios from '../axios';
 
 const handleLoginAPI = (email, password) => {
-    return axios.post('api/login/', { email, password })
+    return axios.post('api/login', { email, password })
         .then(response => {
             return response; // Trả về dữ liệu nếu login thành công
         })
@@ -10,4 +10,11 @@ const handleLoginAPI = (email, password) => {
         });
 };
 
-export default handleLoginAPI;
+const getAllUsers = (id) => {
+    return axios.post('api/get-all-users', { id })
+}
+
+export {
+    handleLoginAPI, getAllUsers
+
+};
