@@ -13,6 +13,8 @@ import UserManage from './containers/System/UserManage.jsx'
 import ProductManage from './containers/System/ProductManage.jsx'
 import RegisterPackageGroupOrAcc from './containers/System/RegisterPackageGroupOrAcc.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,7 @@ createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PersistGate persistor={persister}>
       <RouterProvider router={router} />
+      <ToastContainer />
     </PersistGate>
     {/* // <StrictMode> */}
     {/* // </StrictMode>, */}

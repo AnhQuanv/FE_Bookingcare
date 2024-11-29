@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAllUsers } from '../../services/userService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import ModalCreteUser from './ModalCreateUser';
+import ModalCreateUser from './ModalCreateUser';
 
 const UserManage = () => {
 
@@ -11,33 +11,36 @@ const UserManage = () => {
 
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                let res = await getAllUsers('ALL');
-                if (res && res?.data?.EC === 0) {
-                    setListUsers(res?.data?.users);
-                }
-                console.log(res?.data?.users)
-            } catch (error) {
-                console.log(error);
-            }
-        }
+
         fetchUsers();
     }, [])
 
-    const handleAddNewUser = () => {
-        setShowModalCreate(!showModalCreate);
+    const fetchUsers = async () => {
+        try {
+            let res = await getAllUsers('ALL');
+            if (res && res?.data?.EC === 0) {
+                setListUsers(res?.data?.users);
+            }
+            console.log(res?.data?.users)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className='users-container container mt-5'>
+            <ModalCreateUser
+                show={showModalCreate}
+                setShow={setShowModalCreate}
+                fetchUsers={fetchUsers}
+            />
+
             <h2 className='title text-center mb-4'>Manage users</h2>
             <div className="">
                 <button
                     className='btn btn-primary'
-                    onClick={() => handleAddNewUser()}
+                    onClick={() => setShowModalCreate(!showModalCreate)}
                 ><FontAwesomeIcon icon={faPlus} /> Add new user</button>
-                <ModalCreteUser show={showModalCreate} setShow={setShowModalCreate} />
             </div>
             <div className="container mt-5">
                 <table className="table table-hover">

@@ -10,11 +10,26 @@ const handleLoginAPI = (email, password) => {
         });
 };
 
+// const getAllUsers = (id) => {
+//     return axios.post('api/get-all-users', { id })
+// }
+
 const getAllUsers = (id) => {
-    return axios.post('api/get-all-users', { id })
+    return axios.get(`api/get-all-users?id=${id}`);
+};
+
+const createNewUser = (email, password, firstName, lastName, address) => {
+    const data = {
+        email,
+        password,
+        firstName,
+        lastName,
+        address,
+    };
+    return axios.post('api/create-new-user', data)
 }
 
 export {
-    handleLoginAPI, getAllUsers
+    handleLoginAPI, getAllUsers, createNewUser
 
 };
