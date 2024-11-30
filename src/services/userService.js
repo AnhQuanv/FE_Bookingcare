@@ -33,7 +33,18 @@ const deleteUser = (id) => {
     return axios.delete(`api/delete-user/${id}`);
 }
 
+const editUser = (id, email, firstName, lastName, address) => {
+    const data = {
+        id,
+        email,
+        firstName,
+        lastName,
+        address,
+    };
+    return axios.put('/api/edit-user', data)
+}
+
 export {
-    handleLoginAPI, getAllUsers, createNewUser, deleteUser
+    handleLoginAPI, getAllUsers, createNewUser, deleteUser, editUser
 
 };

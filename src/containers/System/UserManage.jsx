@@ -4,13 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ModalCreateUser from './ModalCreateUser';
 import ModalDeleteUser from './ModalDeleteUser';
+import ModalUpdateUser from './ModalUpdateUser';
 
 const UserManage = () => {
 
     const [listUsers, setListUsers] = useState([]);
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalDelete, setShowModalDelete] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [dataDelete, setDataDelete] = useState({});
+    const [dataUpdate, setDataUpdate] = useState({});
+
 
     useEffect(() => {
 
@@ -34,6 +38,12 @@ const UserManage = () => {
         setDataDelete(user);
     }
 
+    const handleUpdateUser = async (user) => {
+        console.log(user)
+        setShowModalUpdate(true);
+        setDataUpdate(user);
+    }
+
     return (
         <div className='users-container container mt-5'>
             <ModalCreateUser
@@ -48,7 +58,12 @@ const UserManage = () => {
                 fetchUsers={fetchUsers}
 
             />
-
+            <ModalUpdateUser
+                show={showModalUpdate}
+                setShow={setShowModalUpdate}
+                dataUpdate={dataUpdate}
+                fetchUsers={fetchUsers}
+            />
 
             <h2 className='title text-center mb-4'>Manage users</h2>
             <div className="">
@@ -81,7 +96,10 @@ const UserManage = () => {
                                     <td>{user?.address}</td>
                                     <td>
                                         <div className="d-flex justify-content-around">
-                                            <button className="btn btn-primary btn-sm">
+                                            <button
+                                                className="btn btn-primary btn-sm"
+                                                onClick={() => handleUpdateUser(user)}
+                                            >
                                                 <FontAwesomeIcon icon={faPenToSquare} />
                                             </button>
                                             <button
