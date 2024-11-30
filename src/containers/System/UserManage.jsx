@@ -3,12 +3,14 @@ import { getAllUsers } from '../../services/userService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ModalCreateUser from './ModalCreateUser';
+import ModalDeleteUser from './ModalDeleteUser';
 
 const UserManage = () => {
 
     const [listUsers, setListUsers] = useState([]);
     const [showModalCreate, setShowModalCreate] = useState(false);
-
+    const [showModalDelete, setShowModalDelete] = useState(false);
+    const [dataDelete, setDataDelete] = useState({});
 
     useEffect(() => {
 
@@ -27,6 +29,11 @@ const UserManage = () => {
         }
     }
 
+    const handleDeleteUser = async (user) => {
+        setShowModalDelete(true);
+        setDataDelete(user);
+    }
+
     return (
         <div className='users-container container mt-5'>
             <ModalCreateUser
@@ -34,6 +41,14 @@ const UserManage = () => {
                 setShow={setShowModalCreate}
                 fetchUsers={fetchUsers}
             />
+            <ModalDeleteUser
+                show={showModalDelete}
+                setShow={setShowModalDelete}
+                dataDelete={dataDelete}
+                fetchUsers={fetchUsers}
+
+            />
+
 
             <h2 className='title text-center mb-4'>Manage users</h2>
             <div className="">
@@ -50,7 +65,7 @@ const UserManage = () => {
                             <th scope="col">Email</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
-                            <th scope="col">Role</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Actions</th>
                         </tr>
 
@@ -63,13 +78,16 @@ const UserManage = () => {
                                     <td>{user?.email}</td>
                                     <td>{user?.firstName}</td>
                                     <td>{user?.lastName}</td>
-                                    <td>{user?.roleId}</td>
+                                    <td>{user?.address}</td>
                                     <td>
                                         <div className="d-flex justify-content-around">
                                             <button className="btn btn-primary btn-sm">
                                                 <FontAwesomeIcon icon={faPenToSquare} />
                                             </button>
-                                            <button className="btn btn-danger btn-sm">
+                                            <button
+                                                className="btn btn-danger btn-sm"
+                                                onClick={() => handleDeleteUser(user)}
+                                            >
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </button>
                                         </div>
